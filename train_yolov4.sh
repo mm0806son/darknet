@@ -1,0 +1,1 @@
+./darknet detector train data/obj_sm.data ./cfg/yolov4-sm.cfg yolov4.conv.137 -map
