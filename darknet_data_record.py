@@ -174,7 +174,7 @@ def record_data(detections, class_names):
     #         f.close()
     prediction_data = make_data(detections, class_names)
     if len(prediction_data) > 0 :
-        write_file(make_data(detections, class_names))
+        write_file(prediction_data)
 
 
 def inference(darknet_image_queue, detections_queue, fps_queue):
