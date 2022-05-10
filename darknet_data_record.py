@@ -134,7 +134,7 @@ def video_capture(frame_queue, darknet_image_queue):
 #add by wentaos
 def make_data(detections, class_names):
     """
-    Organize detection data in the form of a list containing label, x, y, w, h and timestamp
+    Organize detection data in the form of a list containing label, x, y, w, h, confidence and timestamp
     """
     prediction_data = []
     if len(detections) > 0:
@@ -150,7 +150,7 @@ def make_data(detections, class_names):
 #add by wentaos
 def write_file(prediction_data):
     """
-    Write detection data to the file named by current time that is accurate to the second
+    Write detection data to the file named by current time which is accurate to the second
     """
     file_name = time.strftime("%Y%m%d%H%M%S", time.localtime())
     f = open(args.data_folder + "/"  + file_name + ".txt",'a')
