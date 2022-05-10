@@ -3,7 +3,7 @@
 *.dSYM
 *.csv
 *.out
-*.png
+# *.png
 *.so
 *.exe
 *.dll
@@ -19,7 +19,7 @@ opencv/
 convnet/
 decaf/
 submission/
-cfg/
+# cfg/
 temp/
 build/darknet/*
 build_*/
@@ -64,3 +64,5 @@ uselib
 uselib_track
 darknet
 vcpkg/
+yolov4-tiny.conv.29
+yolov4.conv.137
