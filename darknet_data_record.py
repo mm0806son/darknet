@@ -140,8 +140,10 @@ def make_data(detections, class_names):
     if len(detections) > 0:
         for label, confidence, bbox in detections:
             x, y, w, h = convert2relative(bbox)
+            #x, y, w, h = bbox
             label = class_names.index(label)
             data = (label, float(format(x, '.4f')), float(format(y, '.4f')), float(format(w, '.4f')),float(format(h, '.4f')),float(confidence))
+            #data = (label, int(x), int(y), int(w), int(h), float(confidence))
             prediction_data.append(data)
         micros = datetime.now().microsecond
         prediction_data.append(micros)
@@ -208,7 +210,8 @@ def drawing(frame_queue, detections_queue, fps_queue):
                 detections_adjusted.append((str(label), confidence, bbox_adjusted))
             image = darknet.draw_boxes(detections_adjusted, frame, class_colors)
             if not args.dont_show:
-                cv2.imshow('Inference', image)
+                #cv2.imshow('Inference', image)
+                cv2.imshow('Inference', cv2.resize(image, (video_width//2,video_height//2)))
             if args.out_filename is not None:
                 video.write(image)
             if cv2.waitKey(fps) == 27:
@@ -235,6 +238,7 @@ if __name__ == '__main__':
     darknet_width = darknet.network_width(network)
     darknet_height = darknet.network_height(network)
     input_path = str2int(args.input)
+    #input_path = "rtsp://admin:brain2021@10.29.232.35"
     cap = cv2.VideoCapture(input_path)
     video_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     video_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
