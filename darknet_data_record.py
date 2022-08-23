@@ -14,6 +14,7 @@ from threading import Thread, enumerate
 from queue import Queue
 from datetime import datetime
 import json
+from distortion_correction import undistort
 
 def parser():
     parser = argparse.ArgumentParser(description="YOLO Object Detection")
@@ -35,6 +36,8 @@ def parser():
                         help="remove detections with confidence below this value")
     parser.add_argument("--record_data", action='store_true',
                         help="record real time detection information")
+    parser.add_argument("--distortion_correction", action='store_true',
+                        help="Distortion correction for HIKVISION cameras")
     parser.add_argument("--data_folder", default="./test",
                         help="path to the folder of recorded data ")
     return parser.parse_args()
@@ -122,6 +125,8 @@ def video_capture(frame_queue, darknet_image_queue):
         ret, frame = cap.read() #read a frame from video
         if not ret:
             break
+        if args.distortion_correction:
+            frame = undistort(frame)
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame_resized = cv2.resize(frame_rgb, (darknet_width, darknet_height),
                                    interpolation=cv2.INTER_LINEAR)
