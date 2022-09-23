@@ -19,7 +19,7 @@ def undistort(frame):
     # cameraParams.TangentialDistortion 7.43477036082965e-05	0.000456238468165776
     p1, p2 = 7.43477036082965e-05,	0.000456238468165776
 
-    # 畸变系数
+    # distortion coefficient
     D = np.array([
         k1, k2, p1, p2, 0
     ])
